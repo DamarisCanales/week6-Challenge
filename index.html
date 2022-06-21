@@ -20,17 +20,21 @@
         <form class="form">
             <div class="form-group form-input">
                 <div class="input-group">
-                    <input type="text" placeholder="Enter City" class="form-input">
-                    <button class="btn btn-primary" type="submit">Submit</button>
+                    <input id="cityName" type="text" placeholder="Enter City" class="form-input">
+                    <input type="submit" id="searchBtn" class="btn btn-primary" value="Submit">
                 </div>
             </div>
         </form>
     </div>
 
 
-    <div class="col-8 text-center">Right Column
+    <div class="col-8 text-center">
+
+        <div id="currentForecast" class="row">Today's Weather</div>
+        <div id="fiveDayForecast" class="row">Five-Day Forecast</div>
 
     </div>
+
 </div>
 
 </main>
