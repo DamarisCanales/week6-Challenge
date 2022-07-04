@@ -8,7 +8,6 @@ var submitBtnEl = document.querySelector("#submitBtn");
 var cityInputEl = document.querySelector("#city-name");
 var searchHistoryArr = [];
 
-
 // PAST CITY BUTTON //
 var pastCityBtn = function () {
   if (localStorage.getItem("searchHistoryArr") != null) {
