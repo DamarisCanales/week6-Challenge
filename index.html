@@ -3,12 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <link rel="stylesheet" href="./assets/style.css">
+    <title>Weather Dashboard</title>
 </head>
-
 <body>
+    <header>
+        <h1>Weather Dashboard</h1>
+    </header>
+    <main>
+        <div id="searchBoxDiv">
+        <div id="searchBoxForm">
+            <h2>Get Your Forecast:</h2>
+            <form id="searchForm">
+                <input class="formGroup" for="city-name">Search:</input>
+                <input id="city-name" type="text" placeholder ="City Name" class="formInput" />
+                <input type="submit" class="btnPrimary" id="submitBtn"> Submit </input>
+              </form> 
+        </div>
+        <div id="pastSearches">  
+        </div>
+    </div>
+        
+    <div id="currentForecast"></div>
+        
+    <div id="fiveDayForecast"></div>
+
+    </main>
+
+    <script src="./assets/script.js"></script>
 
 </body>
 

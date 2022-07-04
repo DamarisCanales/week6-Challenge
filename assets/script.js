@@ -1,4 +1,7 @@
-
+// GLOBAL VARIABLE STASH //
+var searchBoxEl = document.querySelector("#searchBoxDiv")
+var pastSearchBoxEl = document.querySelector("#pastSearches")
+var currentBoxEl = document.querySelector("")
 
 
 
