@@ -8,6 +8,8 @@ var submitBtnEl = document.querySelector("#submitBtn");
 var cityInputEl = document.querySelector("#city-name");
 var searchHistoryArr = [];
 
+
+// PAST CITY BUTTON //
 var pastCityBtn = function () {
   if (localStorage.getItem("searchHistoryArr") != null) {
     var stringOfArray = localStorage.getItem("searchHistoryArr");
@@ -21,28 +23,10 @@ var pastCityBtn = function () {
   }
 };
 
+// SAVE TO LOCAL STORAGE //
 var saveLocalStorage = function () {
-  //save
   var newArray = JSON.stringify(searchHistoryArr);
   localStorage.setItem("searchHistoryArr", newArray);
-};
-
-var submitCityForm = function (event) {
-  event.preventDefault();
-  var cityName = cityInputEl.value.trim();
-  // var cityExists = getCityCoordinates(cityName);
-
-  if (cityName) {
-    getCityCoordinates(cityName);
-    createPastCityBtn(cityName);
-    searchHistoryArr.push(cityName);
-    console.log(searchHistoryArr);
-    saveLocalStorage();
-    cityInputEl.textContent = "";
-    cityInputEl.value = "";
-  } else {
-    alert("Please check your spelling and try again.");
-  }
 };
 
 var createPastCityBtn = function (city) {
@@ -55,6 +39,24 @@ var createPastCityBtn = function (city) {
   });
 };
 
+// CITY NAME VALIDATION //
+var submitCityForm = function (event) {
+  event.preventDefault();
+  var cityName = cityInputEl.value.trim();
+
+  if (cityName) {
+    getCityCoordinates(cityName);
+    createPastCityBtn(cityName);
+    searchHistoryArr.push(cityName);
+    saveLocalStorage();
+    cityInputEl.textContent = "";
+    cityInputEl.value = "";
+  } else {
+    alert("Please check your spelling and try again.");
+  }
+};
+
+// GET CITY COORDINATES //
 var getCityCoordinates = function (city) {
   var locationApiURL =
     "https://api.openweathermap.org/geo/1.0/direct?q=" +
@@ -62,14 +64,13 @@ var getCityCoordinates = function (city) {
     "&limit=5&appid=d91f911bcf2c0f925fb6535547a5ddc9";
   currentBoxEl.textContent = "";
   fiveDayBoxEl.textContent = "";
-  //optional to exclude a part: &exclude={part}
   fetch(locationApiURL).then(function (response) {
-    //if request was successful:
+    // if request is successful: //
     if (response.ok) {
       response
         .json()
         .then(function (data) {
-          //pass response data to DOM function
+          // pass response data //
           var latCoordinates = data[0].lat;
           var lonCoordinates = data[0].lon;
           var cityIdentity = data[0].name;
@@ -93,15 +94,15 @@ var getCurrentForecast = function (lat, lon, city) {
     "&units=imperial&appid=d91f911bcf2c0f925fb6535547a5ddc9";
 
   fetch(weatherApiURL).then(function (response) {
-    //if request was successful:
+    // if request was successful: //
     if (response.ok) {
       response.json().then(function (data) {
-        //pass response data to DOM function
+        // pass response data //
         console.log(data);
 
         var currentDate = calculateDate(data.current.dt);
 
-        displayToday(
+        displayCurrent(
           city,
           currentDate,
           data.current.weather[0].icon,
@@ -123,12 +124,11 @@ var getCurrentForecast = function (lat, lon, city) {
         }
       });
     } else {
-      //direct to homepage if not successful
-      //document.location.replace("./index.html");
     }
   });
 };
 
+// TIME STAMP CALCULATIONS //
 var calculateDate = function (timestamp) {
   var unixTime = timestamp;
   var currentDate = new Date(unixTime * 1000);
@@ -142,7 +142,8 @@ var calculateDate = function (timestamp) {
   return fullDate;
 };
 
-var displayToday = function (
+// CURRENT FORECAST DISPLAY //
+var displayCurrent = function (
   city,
   date,
   iconCode,
@@ -151,18 +152,17 @@ var displayToday = function (
   humidity,
   UVindex
 ) {
-  //city and date [no picture as of yet]
+
   var todayTextEl = document.createElement("h1");
   var cityAndDateEl = document.createElement("h2");
   var forecastIconEl = document.createElement("img");
   var iconURL = "https://openweathermap.org/img/wn/" + iconCode + "@2x.png";
-  //NEEDS TO GET THE icon CODE
+
+  // get icon codes //
   forecastIconEl.setAttribute("src", iconURL);
 
-  todayTextEl.textContent = "Today:";
   cityAndDateEl.textContent = city + " on " + date;
 
-  //display next few areas
   var tempEl = document.createElement("p");
   tempEl.textContent = "Temp: " + temp + "\xB0 F";
 
@@ -198,15 +198,15 @@ var displayToday = function (
 
 var displayFiveDay = function (date, iconCode, temp, wind, humidity) {
   var dayBoxEl = document.createElement("div");
-  dayBoxEl.setAttribute("id", "day-box");
+  dayBoxEl.setAttribute("id", "dayBox");
   var dateEl = document.createElement("h3");
   var forecastIconEl = document.createElement("img");
   var iconURL = "https://openweathermap.org/img/wn/" + iconCode + "@2x.png";
-  //NEEDS TO GET THE icon CODE
+  // get icon codes //
   forecastIconEl.setAttribute("src", iconURL);
 
   dateEl.textContent = date;
-  //display next few areas
+
   var tempEl = document.createElement("p");
   tempEl.textContent = "Temp: " + temp + "\xB0 F";
   var windEl = document.createElement("p");
@@ -222,9 +222,11 @@ var displayFiveDay = function (date, iconCode, temp, wind, humidity) {
   fiveDayBoxEl.appendChild(dayBoxEl);
 };
 
-//when a button is clicked, it fetches data, and displays the current weather and the next 5 days. Then create a button of the most recent input
+// FULL FORECAST SETUP //
 pastCityBtn();
 submitBtnEl.addEventListener("click", submitCityForm);
+
+
 
 
 
