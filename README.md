@@ -22,18 +22,20 @@ The local storage is used here to store the previous search city and display the
 ## Features
 When a user loads the page, they will see a search bar. They'll enter a city name and click the submit button, upon which several things will happen:
 
-![Upon initial wbepage uplaod] (./assets/images/_Users_Damaris_Work_CHALLENGES_week6-Challenge_index.html_ (1).png)
+![Weather Dashboard Website initial Upload](/assets/images/Weather_Dashboard_Website_Intial_Upload.png "San Juan Mountains")
 
 - If a city is found, the current forcast will be displayed, as well as the city name, date, an icon of the current weather, the temperature (in fahrenheit), wind speed, humidity, and UV Index.
+
+
+
 
 - If a city is not found, an alert will display, and the city will be removed from the saved array.
 
 - Below the current forcast, the forecast for the next five days will be displayed - the date, an icon displaying the weather, the temperature (in fahrenheit), wind speed, and humidity.
 
 - The color surrounding the UV index will change based on whether the UV index is favorable, moderate, or severe.
-![Upon submitting a city name](./assets/images/_Users_Damaris_Work_CHALLENGES_week6-Challenge_index.html_ (2).png) 
+
 
 - Finally, a button will be added below the search bar to save the city that was entered. Even when the page is refreshed or reloaded, the past cities will stay saved.
 
 
-![Upon several city name entries have been entered](assets/images/_Users_Damaris_Work_CHALLENGES_week6-Challenge_index.html_ (3).png) 
